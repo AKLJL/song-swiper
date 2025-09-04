@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-case=1.0">
+    <title>Settings - Song Swiper</title>
+    <link rel="stylesheet" href__="style.css">
+    <link href__="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>Song Swiper</h1>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <div class="settings-container">
+            <h2>Settings</h2>
+            <div class="user-profile">
+                <h3>User Profile</h3>
+                <div id="loading" class="loading">Loading profile...</div>
+                <div id="userInfo" style="display: none;">
+                    <img id="userImage" class="user-avatar" alt="User">
+                    <div class="user-details">
+                        <h4 id="userName"></h4>
+                        <p id="userEmail"></p>
+                    </div>
+                </div>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // Load user profile and handle logout
+        const token = localStorage.getItem('spotify_auth_token');
+        if (!token) {
+            window.location.href = 'index.html';
+        }
+
+        // Fetch user profile
+        fetch('https://api.spotify.com/v1/me', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        })
+        .then(response => response.json())
+        .then(user => {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('userInfo').style.display = 'flex';
+            document.getElementById('userName').textContent = user.display_name;
+            document.getElementById('userEmail').textContent = user.email;
+            document.getElementById('userImage').src = user.images[0]?.url || '';
+        })
+        .catch(() => {
+            localStorage.removeItem('spotify_auth_token');
+            window.location.href = 'index.html';
+        });
+
+        // Handle logout
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('spotify_auth_token');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
