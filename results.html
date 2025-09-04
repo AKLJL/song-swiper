@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Results - Song Swiper</title>
+    <link rel="stylesheet" href__="style.css">
+    <link href__="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>Song Swiper</h1>
+            <button onclick="window.location.href__='settings.html'" class="settings-btn">⚙️</button>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <h2>Your Results</h2>
+        <div class="results-container">
+            <div class="results-section">
+                <h3 class="kept-title">Kept Songs (<span id="keptCount">0</span>)</h3>
+                <div id="keptSongs" class="song-list"></div>
+            </div>
+            <div class="results-section">
+                <h3 class="skipped-title">Skipped Songs (<span id="skippedCount">0</span>)</h3>
+                <div id="skippedSongs" class="song-list"></div>
+            </div>
+        </div>
+        <div class="create-playlist-section">
+            <button id="createPlaylistBtn" class="primary-btn">Add Kept Songs to New Playlist</button>
+        </div>
+    </main>
+    
+    <script src="results.js"></script>
+</body>
+</html>
