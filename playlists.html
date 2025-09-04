@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Playlists - Song Swiper</title>
+    <link rel="stylesheet" href__="style.css">
+    <link href__="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>Song Swiper</h1>
+            <button onclick="window.location.href__='settings.html'" class="settings-btn">⚙️</button>
+        </div>
+        <div class="social-links">
+            <a href__="https://www.youtube.com/@AKLJL64" target="_blank">📺</a>
+            <a href__="https://x.com/AKLJL64" target="_blank">🐦</a>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <h2>Your Playlists</h2>
+        <div id="loading" class="loading">Loading playlists...</div>
+        <div id="playlistGrid" class="playlist-grid"></div>
+    </main>
+    
+    <script src="playlists.js"></script>
+</body>
+</html>
