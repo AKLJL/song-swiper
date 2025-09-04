@@ -1,5 +1,5 @@
 const CLIENT_ID = '2557a72b59e140fe98c86ec8e8ec5854'; // Your Spotify Client ID
-const REDIRECT_URI = 'https://akljl.github.io/song-swiper/'; // Change this to your GitHub Pages URL
+const REDIRECT_URI = 'https://AKLJL.github.io/song-swiper/'; // Change this to your GitHub Pages URL
 const SCOPES = [
     'playlist-read-private',
     'playlist-modify-public', 
