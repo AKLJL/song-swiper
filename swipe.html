@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swipe Songs - Song Swiper</title>
+    <link rel="stylesheet" href__="style.css">
+    <link href__="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>Song Swiper</h1>
+            <button onclick="window.location.href__='settings.html'" class="settings-btn">⚙️</button>
+        </div>
+    </header>
+    
+    <main class="swipe-container">
+        <div id="loading" class="loading">Loading songs...</div>
+        <div id="swipeArea" class="swipe-area" style="display: none;">
+            <div id="songCard" class="song-card"></div>
+            <div class="swipe-buttons">
+                <button id="passBtn" class="swipe-btn pass-btn">❌</button>
+                <button id="keepBtn" class="swipe-btn keep-btn">❤️</button>
+            </div>
+            <div id="progress" class="progress"></div>
+        </div>
+    </main>
+    
+    <div id="completionModal" class="modal">
+        <div class="modal-content">
+            <h3>Playlist Complete!</h3>
+            <p>You've swiped through all the songs. Ready to see your results?</p>
+            <button onclick="window.location.href__='results.html'" class="primary-btn">Show Results</button>
+        </div>
+    </div>
+    
+    <script src="swipe.js"></script>
+</body>
+</html>
