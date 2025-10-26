@@ -9,6 +9,11 @@ const SCOPES = [
     'playlist-modify-private'
 ];
 
+console.log('🎵 Song Swiper - Auth.js loaded');
+console.log('Client ID:', CLIENT_ID);
+console.log('Redirect URI:', REDIRECT_URI);
+console.log('Current Page:', window.location.href);
+
 function generateRandomString(length) {
     const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const values = crypto.getRandomValues(new Uint8Array(length));
@@ -16,20 +21,31 @@ function generateRandomString(length) {
 }
 
 function getAccessToken() {
+    // Check URL hash for token
     const hash = window.location.hash.substring(1);
     const params = new URLSearchParams(hash);
     
     if (params.get('access_token')) {
         const token = params.get('access_token');
+        console.log('✅ Token found in URL hash');
         localStorage.setItem('spotify_access_token', token);
         window.location.hash = '';
         return token;
     }
     
-    return localStorage.getItem('spotify_access_token');
+    // Check localStorage
+    const storedToken = localStorage.getItem('spotify_access_token');
+    if (storedToken) {
+        console.log('✅ Token found in localStorage');
+    } else {
+        console.log('❌ No token found');
+    }
+    return storedToken;
 }
 
 function redirectToSpotifyAuth() {
+    console.log('🚀 Redirecting to Spotify auth...');
+    
     const state = generateRandomString(16);
     localStorage.setItem('spotify_auth_state', state);
     
@@ -41,27 +57,58 @@ function redirectToSpotifyAuth() {
         state: state
     });
     
-    window.location.href = authUrl;
+    console.log('Auth URL:', authUrl);
+    console.log('⚠️ Make sure this redirect URI is in Spotify Dashboard:', REDIRECT_URI);
+    
+    // Add small delay to ensure console logs show
+    setTimeout(() => {
+        window.location.href = authUrl;
+    }, 100);
 }
 
-// Auto-redirect if on login page and already have token
-if (window.location.pathname.includes('index.html') || window.location.pathname === '/song-swiper/' || window.location.pathname === '/song-swiper') {
-    const token = getAccessToken();
+// Wait for DOM to be ready
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('📄 DOM loaded');
     
-    if (token && !window.location.hash) {
-        window.location.href = 'playlists.html';
-    }
+    const currentPath = window.location.pathname;
+    console.log('Current path:', currentPath);
     
-    const loginBtn = document.getElementById('loginBtn');
-    if (loginBtn) {
-        loginBtn.addEventListener('click', redirectToSpotifyAuth);
+    // Check if we're on the login page
+    const isLoginPage = currentPath.includes('index.html') || 
+                        currentPath === '/song-swiper/' || 
+                        currentPath === '/song-swiper';
+    
+    if (isLoginPage) {
+        console.log('📍 On login page');
+        
+        const token = getAccessToken();
+        
+        // If we have a token and no hash, redirect to playlists
+        if (token && !window.location.hash) {
+            console.log('🔄 Token exists, redirecting to playlists...');
+            window.location.href = 'playlists.html';
+            return;
+        }
+        
+        // Setup login button
+        const loginBtn = document.getElementById('loginBtn');
+        if (loginBtn) {
+            console.log('✅ Login button found');
+            loginBtn.addEventListener('click', function(e) {
+                console.log('🖱️ Login button clicked!');
+                e.preventDefault();
+                redirectToSpotifyAuth();
+            });
+        } else {
+            console.error('❌ Login button NOT found!');
+        }
+    } else {
+        // On other pages, check for token
+        console.log('📍 On protected page');
+        const token = getAccessToken();
+        if (!token) {
+            console.log('🔄 No token, redirecting to login...');
+            window.location.href = 'index.html';
+        }
     }
-}
-
-// Check auth on other pages
-if (!window.location.pathname.includes('index.html') && window.location.pathname !== '/song-swiper/' && window.location.pathname !== '/song-swiper') {
-    const token = getAccessToken();
-    if (!token) {
-        window.location.href = 'index.html';
-    }
-}
+});
