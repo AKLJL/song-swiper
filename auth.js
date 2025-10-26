@@ -1,5 +1,5 @@
 const CLIENT_ID = '2557a72b59e140fe98c86ec8e8ec5854';
-const REDIRECT_URI = 'https://akljl.github.io/song-swiper/index.html'; 
+const REDIRECT_URI = 'https://akljl.github.io/song-swiper/index.html';
 const SCOPES = [
     'user-read-private',
     'user-read-email',
@@ -45,7 +45,7 @@ function redirectToSpotifyAuth() {
 }
 
 // Auto-redirect if on login page and already have token
-if (window.location.pathname.includes('index.html') || window.location.pathname === '/song-swiper/') {
+if (window.location.pathname.includes('index.html') || window.location.pathname === '/song-swiper/' || window.location.pathname === '/song-swiper') {
     const token = getAccessToken();
     
     if (token && !window.location.hash) {
@@ -59,7 +59,7 @@ if (window.location.pathname.includes('index.html') || window.location.pathname 
 }
 
 // Check auth on other pages
-if (!window.location.pathname.includes('index.html') && window.location.pathname !== '/song-swiper/') {
+if (!window.location.pathname.includes('index.html') && window.location.pathname !== '/song-swiper/' && window.location.pathname !== '/song-swiper') {
     const token = getAccessToken();
     if (!token) {
         window.location.href = 'index.html';
