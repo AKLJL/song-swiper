@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Swiper - Swipe</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>🎵 Song Swiper</h1>
+            <a href="settings.html" class="settings-btn">⚙️ Settings</a>
+        </div>
+        <div class="social-links">
+            <a href="https://www.youtube.com/@AKLJL64" target="_blank">YouTube</a>
+            <span>•</span>
+            <a href="https://x.com/AKLJL64" target="_blank">X/Twitter</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div id="loading" class="loading">Loading songs...</div>
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="swipeContainer" class="swipe-container" style="display: none;">
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+                <p class="progress-text"><span id="currentIndex">0</span> / <span id="totalSongs">0</span></p>
+
+                <div class="song-card">
+                    <img id="albumArt" src="" alt="Album Art">
+                    <h2 id="songTitle">Song Title</h2>
+                    <p id="artistName">Artist Name</p>
+                    <p id="albumName">Album Name</p>
+                </div>
+
+                <div class="swipe-buttons">
+                    <button id="passBtn" class="swipe-btn pass-btn">👎 Pass</button>
+                    <button id="keepBtn" class="swipe-btn keep-btn">👍 Keep</button>
+                </div>
+            </div>
+
+            <div id="completeMessage" class="complete-message" style="display: none;">
+                <h2>🎉 All Done!</h2>
+                <p>You've swiped through all songs.</p>
+                <button onclick="window.location.href='results.html'" class="spotify-btn">View Results</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="auth.js"></script>
+    <script src="swipe.js"></script>
+</body>
+</html>
