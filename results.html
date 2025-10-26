@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Swiper - Results</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>🎵 Song Swiper</h1>
+            <a href="settings.html" class="settings-btn">⚙️ Settings</a>
+        </div>
+        <div class="social-links">
+            <a href="https://www.youtube.com/@AKLJL64" target="_blank">YouTube</a>
+            <span>•</span>
+            <a href="https://x.com/AKLJL64" target="_blank">X/Twitter</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2>Your Results</h2>
+            
+            <div class="results-actions">
+                <button id="createPlaylistBtn" class="spotify-btn">➕ Add Kept Songs to New Playlist</button>
+                <button onclick="window.location.href='playlists.html'" class="secondary-btn">↩️ Back to Playlists</button>
+            </div>
+
+            <div id="playlistSuccess" class="success-message" style="display: none;"></div>
+            <div id="error" class="error" style="display: none;"></div>
+
+            <div class="results-grid">
+                <div class="result-section">
+                    <h3>👍 Kept Songs (<span id="keptCount">0</span>)</h3>
+                    <ul id="keptList" class="song-list"></ul>
+                </div>
+
+                <div class="result-section">
+                    <h3>👎 Skipped Songs (<span id="skippedCount">0</span>)</h3>
+                    <ul id="skippedList" class="song-list"></ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="auth.js"></script>
+    <script src="results.js"></script>
+</body>
+</html>
