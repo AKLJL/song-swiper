@@ -1,5 +1,5 @@
 const CLIENT_ID = '2557a72b59e140fe98c86ec8e8ec5854';
-const REDIRECT_URI = 'https://akljl.github.io/song-swiper/index.html';
+const REDIRECT_URI = 'https://akljl.github.io/song-swiper/index.html'; 
 const SCOPES = [
     'user-read-private',
     'user-read-email',
