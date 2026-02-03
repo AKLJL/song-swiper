@@ -1,5 +1,5 @@
 const CLIENT_ID = '2557a72b59e140fe98c86ec8e8ec5854';
-const REDIRECT_URI = 'https://akljl.github.io/song-swiper/index.html';
+const REDIRECT_URI = new URL('index.html', window.location.href).toString();
 const SCOPES = [
     'user-read-private',
     'user-read-email',
@@ -29,10 +29,7 @@ function getAccessToken() {
     return localStorage.getItem('spotify_access_token');
 }
 
-function redirectToSpotifyAuth() {
-    const state = generateRandomString(16);
-    localStorage.setItem('spotify_auth_state', state);
-    
+function buildAuthUrl(state) {
     const params = new URLSearchParams({
         response_type: 'token',
         client_id: CLIENT_ID,
@@ -41,8 +38,15 @@ function redirectToSpotifyAuth() {
         state: state,
         show_dialog: true
     });
+
+    return `https://accounts.spotify.com/authorize?${params.toString()}`;
+}
+
+function redirectToSpotifyAuth() {
+    const state = generateRandomString(16);
+    localStorage.setItem('spotify_auth_state', state);
     
-    const authUrl = `https://accounts.spotify.com/authorize?${params.toString()}`;
+    const authUrl = buildAuthUrl(state);
     
     console.log('Redirecting to:', authUrl);
     
@@ -73,6 +77,11 @@ window.addEventListener('load', function() {
                 redirectToSpotifyAuth();
                 return false; // Prevent any default action
             };
+        }
+
+        const testLink = document.getElementById('testAuthLink');
+        if (testLink) {
+            testLink.href = buildAuthUrl('test123');
         }
     } else {
         // Check auth on other pages
